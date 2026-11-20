@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — Pre-Token Protocols Ranked by Implied Launch Value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <p class="kicker">TOKEN RADAR &middot; DEFI LLAMA SNAPSHOT <span id="asOf"></span></p>
+    <h1>Which pre-token protocol is worth farming next?</h1>
+    <p class="sub">Every protocol below records no token in the snapshot. Each is ranked by an implied launch value computed from its own TVL, 7-day growth, age and chain reach — never from a hand-picked list of names.</p>
+  </div>
+  <div class="stats" id="stats"></div>
+</header>
+
+<section class="model" id="modelBox"></section>
+
+<section class="controls">
+  <input id="q" type="search" placeholder="Search name or slug…" aria-label="Search protocols">
+  <select id="cat" aria-label="Filter by category"><option value="">All categories</option></select>
+  <select id="chain" aria-label="Filter by chain"><option value="">All chains</option></select>
+  <select id="sort" aria-label="Sort board">
+    <option value="implied">Sort: implied value ↓</option>
+    <option value="tvl">Sort: TVL ↓</option>
+    <option value="growth">Sort: 7-day growth ↓</option>
+    <option value="age">Sort: oldest first</option>
+  </select>
+  <label class="chk"><input id="watchOnly" type="checkbox"> Watchlist only</label>
+</section>
+
+<main>
+  <table id="board">
+    <thead><tr>
+      <th>#</th><th>Protocol</th><th>Category</th><th>Chains</th>
+      <th class="num">TVL</th><th class="num">7d</th><th class="num">Age</th>
+      <th class="num">Implied value</th><th class="num">xTVL</th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <p class="count" id="count"></p>
+</main>
+
+<section id="detail" class="detail" hidden></section>
+
+<section class="live">
+  <h2>Live-token comparables — what the market actually pays</h2>
+  <p>Protocols whose token already trades, ranked by market cap. Their median market-cap/TVL ratio anchors the model's base multiple of 0.28x. The board never mixes these into the ranking: their value is the market's, not the model's.</p>
+  <table id="liveTable">
+    <thead><tr><th>Protocol</th><th>Category</th><th class="num">TVL</th><th class="num">Market cap</th><th class="num">mcap / TVL</th></tr></thead>
+    <tbody id="liveRows"></tbody>
+  </table>
+</section>
+
+<footer>
+  <p>Implied value is this radar's own claim from the sealed snapshot; it is not a prediction that a token will launch, or when. “Records no token” means DefiLlama's record carries no token — a protocol may still have one its record does not carry. Snapshot source: <span id="src"></span></p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
