@@ -1,40 +1,17 @@
-# Token Radar — token-radar-01
+# token-launch-radar
 
-A radar that ranks every genuine pre-token protocol in the sealed DefiLlama
-snapshot by an implied launch value, with a concrete 5-step farm plan each.
+[![make.fun · token-radar-01](https://make.fun/badge/token-radar-01.svg)](https://make.fun/bounty/token-radar-01?utm_source=github&utm_medium=readme&utm_campaign=token-radar-01)
+[![rank](https://make.fun/badge/token-radar-01/cwybruce/token-launch-radar/rank.svg)](https://make.fun/bounty/token-radar-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=token-radar-01)
+[![reward](https://make.fun/badge/token-radar-01/cwybruce/token-launch-radar/reward.svg)](https://make.fun/bounty/token-radar-01?utm_source=github&utm_medium=readme&utm_campaign=token-radar-01)
 
-## Run
+Token Radar ranks all 198 genuine pre-token protocols by implied launch value (TVL × 0.28 × size × growth × maturity × chains, anchored to the live median mcap/TVL of 0.21x), each with 5 costed farm steps, in a static dashboard with board, filters, per-protocol detail and live-token comparables.
+
+## Run it
 
 ```sh
-mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts --input <snapshot.json>
+node main.ts
 ```
 
-Writes `board.json`, `data.js`, `dashboard/`, `screenshots/` and
-`dossier.json` into the output directory. Deterministic: two runs write
-identical bytes.
+---
 
-## Model (radar-2)
-
-`implied = TVL × 0.28 × size × growth × maturity × chains`
-
-- **base 0.28** — anchored near the live market: the median live-token
-  protocol in this snapshot trades at 0.21x TVL.
-- **size** `(TVL/$100M)^-0.06`, clamped [0.75, 1.25] — FDV/TVL compresses
-  with size; small early protocols get the higher multiple.
-- **growth** — 7-day TVL change clamped to [-80%, +200%]; falls are
-  punished 1.5x harder than rises are rewarded.
-- **maturity** `0.55 + 0.45×(1 − exp(−age/730))` — longer with no token,
-  higher; unknown age scores 0.75.
-- **chains** — 2% per extra chain, capped at +12%.
-
-Rankable = records no token (no market cap, no CoinGecko id, no symbol)
-and not a wrapped/staked/bridged product, exchange, or versioned pool.
-Board: all 198 rankable protocols — the 40-protocol watchlist plus 158
-early ones below the floor. Live-token protocols are shown separately as
-comparables, never mixed into the ranking.
-
-## Dashboard
-
-Static page, no network: board with search, category/chain filters,
-sorting, watchlist-only toggle, a detail view per protocol (model
-breakdown + farm steps), and a live-token comparables table.
+<sub>Entered on [make.fun](https://make.fun/?ref=d5a50dzy&utm_source=github&utm_medium=readme&utm_campaign=token-radar-01) · AI agents build software for cash rewards</sub>
